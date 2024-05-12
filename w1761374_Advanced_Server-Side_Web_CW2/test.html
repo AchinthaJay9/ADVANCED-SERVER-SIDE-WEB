@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TEST</title>
+</head>
+<body>
+
+<button onclick="login()">Login</button>
+<button onclick="profile()">Profile</button>
+<button onclick="update()">Update</button>
+<button onclick="register()">Register</button>
+<button onclick="sign_out()">Sign out</button>
+
+<script>
+
+	async function profile() {
+		let response = await fetch("/api/index.php/user/", {
+			method: "GET",
+			headers: {"Content-Type": "application/json"},
+		});
+
+		let promise = await response.json();
+		console.log(promise);
+
+		response = await fetch("/api/index.php/user/", {
+			method: "PATCH",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify({
+				first_name: document.getElementById('first_name').value,
+				last_name: document.getElementById('last_name').value,
+				username: document.getElementById('username').value,
+				email: document.getElementById('email').value,
+				password: document.getElementById('password').value,
+				confirm_password: document.getElementById('confirm_password').value
+			})
+		});
+
+		promise = await response.json();
+		console.log(promise);
+
+	}
+	async function update() {
+		let response = await fetch("/api/index.php/user/", {
+			method: "PATCH",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify({
+				first_name: "Achintha",
+				last_name: "Jayatilake",
+				username: "Achin",
+				email: "achinthajayatilake@gmail.com",
+			})
+		});
+
+		let promise = await response.text();
+		console.log(promise);
+	}
+
+	async function register() {
+		let response = await fetch("/api/index.php/user/", {
+			method: "POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify({
+				first_name: "Achintha",
+				last_name: "Jayatilake",
+				username: "Achin",
+				email: "achinthajayatilake@gmail.com",
+				password: "12345678",
+				confirm_password: "12345678"
+			})
+			// body: JSON.stringify({
+			// 	first_name: document.getElementById("first_name").value,
+			// 	last_name: document.getElementById("last_name").value,
+			// 	username: document.getElementById("username").value,
+			// 	email: document.getElementById("email").value,
+			// 	password: document.getElementById("password").value,
+			// 	confirm_password: document.getElementById("confirm_password").value
+			// })
+		});
+
+		let promise = await response.text();
+		console.log(promise);
+	}
+
+	async function sign_out() {
+		let response = await fetch("/api/index.php/user/", {
+			method: "DELETE",
+			headers: {"Content-Type": "application/json"}
+		});
+
+		let promise = await response.text();
+		console.log(promise);
+	}
+
+	async function login() {
+		let response = await fetch("/api/index.php/user/login/", {
+			method: "POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify({
+				username: "Achin",
+				password: "12345678",
+			})
+		});
+
+		let promise = await response.text();
+		console.log(promise);
+	}
+
+</script>
+
+<hr/>
+<script>
+
+	async function ask() {
+		let response = await fetch("/api/index.php/question/", {
+			method: "POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify({
+				question: "What is your name?",
+				tags: JSON.stringify(["hello", "world"]),
+			})
+		});
+
+		let promise = await response.text();
+		console.log(promise);
+	}
+	async function view() {
+		let response = await fetch("/api/index.php/question/", {
+			method: "GET",
+			headers: {"Content-Type": "application/json"}
+		});
+
+		let promise = await response.text();
+		console.log(promise);
+	}
+	async function view_one() {
+		let response = await fetch("/api/index.php/question/index/1", {
+			method: "GET",
+			headers: {"Content-Type": "application/json"}
+		});
+
+		let promise = await response.text();
+		console.log(promise);
+	}
+
+
+</script>
+
+<button onclick="answer()">Answer</button>
+<button onclick="view_answer()">View answer</button>
+
+<hr/>
+<script>
+
+	async function answer() {
+		let response = await fetch("/api/index.php/answer/index/1", {
+			method: "POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify({
+				question: "What is your name?",
+				tags: JSON.stringify(["hello", "world"]),
+			})
+		});
+
+		let promise = await response.text();
+		console.log(promise);
+	}
+	async function view_answer() {
+		let response = await fetch("/api/index.php/answer/index/1", {
+			method: "GET",
+			headers: {"Content-Type": "application/json"}
+		});
+
+		let promise = await response.text();
+		console.log(promise);
+	}
+
+
+</script>
+
+<button onclick="ask()">Ask</button>
+<button onclick="view()">View</button>
+<button onclick="view_one()">View one</button>
+<hr/>
+<button onclick="like_question()">Like</button>
+<script>
+
+	async function like_question() {
+		let response = await fetch("/api/index.php/like/index/", {
+			method: "POST",
+			headers: {"Content-Type": "application/json"},
+			body: JSON.stringify({
+				like: 1,
+				question: 1,
+				answer: 1,
+			})
+		});
+
+		let promise = await response.text();
+		console.log(promise);
+	}
+
+</script>
+</body>
+</html>

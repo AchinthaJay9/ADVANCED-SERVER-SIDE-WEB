@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Developer Support</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!--
+    <link href="backbone/vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="backbone/app/css/main.css" rel="stylesheet">
+-->
+    <style>
+        #details-container {
+            position: absolute;
+            bottom: 72px;
+            left: 70px;
+        }
+
+
+        #navigation{
+            background-color: rgba(109, 123, 126, 0.82);
+            text-align: center;
+        }
+
+        #navigation div[class*="col-4"]{
+            margin-top: 39px;
+        }
+        #navigation a{
+            color: black;
+            font-size: 39px;
+            font-weight: bold;
+            text-decoration: none;
+
+        }
+        body, .main-container {
+            width: 100vw;
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow-y: hidden;
+            overflow-x: hidden;
+        }
+
+    </style>
+    <!--Login-->
+    <style>
+
+        #login-container {
+            width: 600px;
+            right: 80px;
+            /*Align vertically center*/
+            top: 24%;
+            padding: 40px;
+            position: absolute;
+        }
+
+        #logo {
+            width: 450px;
+            height: 450px;
+            left: 110px;
+            top: 110px;
+            position: absolute;
+        }
+
+        #dev-sup {
+            width: 315px;
+            height: 110px;
+            left: 180px;
+            bottom: 60px;
+            position: absolute;
+        }
+
+        #login-container label{
+            font-size: 31px;
+            color: white;
+        }
+
+        #login-container input{
+            width: 500px;
+            height: 65px;
+            background-color: white;
+            border-radius: 0 !important;
+            font-size: 30px !important;
+        }
+
+        #login-container button{
+            width: 140px;
+            height: 50px;
+            font-size: 14px;
+            padding: 13px;
+            border-radius: 52px !important;
+        }
+
+    </style>
+    <style>
+
+        #profile-container label{
+            font-size: 31px;
+            color: white;
+        }
+
+        #profile-container input{
+            width: 500px;
+            height: 65px;
+            background-color: white;
+            border-radius: 0 !important;
+            font-size: 30px !important;
+        }
+
+        #profile-container button{
+            width: 400px;
+            height: 50px;
+            font-size: 14px;
+            padding: 13px;
+            border-radius: 52px !important;
+        }
+
+    </style>
+    <style>
+
+        #answer-nav{
+            background-color: rgba(109, 123, 126, 0.82);
+            text-align: center;
+        }
+
+        #answer-nav div[class*="col-4"]{
+            margin-top: 39px;
+        }
+        #answer-nav a{
+            color: black;
+            font-size: 39px;
+            font-weight: bold;
+            text-decoration: none;
+
+        }
+    </style>
+    <style>
+
+        #register-container label{
+            font-size: 31px;
+            color: white;
+        }
+
+        #register-container input{
+            width: 500px;
+            height: 65px;
+            background-color: white;
+            border-radius: 0 !important;
+            font-size: 30px !important;
+        }
+
+        #register-container button{
+            width: 140px;
+            height: 50px;
+            font-size: 14px;
+            padding: 13px;
+            border-radius: 52px !important;
+        }
+
+    </style>
+
+    <style>
+
+
+        #reset-container label{
+            font-size: 31px;
+            color: white;
+        }
+
+        #reset-container input{
+            height: 65px;
+            background-color: white;
+            border-radius: 0 !important;
+            font-size: 30px !important;
+        }
+
+        #reset-container button{
+            width: 400px;
+            height: 50px;
+            font-size: 14px;
+            padding: 13px;
+            border-radius: 52px !important;
+        }
+
+    </style>
+
+
+</head>
+<body>
+<div class="main-container">
+
+</div>
+
+<script type="text/template" id="tpl-contacts">
+    <h2 class="page-header text-center">List of contacts</h2>
+    <p class="text-center">
+        <a href="#contacts/new" class="btn btn-lg btn-outline">Add Contact</a>
+        <a href="#test" class="btn btn-lg btn-outline">Test</a>
+        <a href="#contacts/new" class="btn btn-lg btn-outline">Add Contact</a>
+    </p>
+    <ul class="media-list row contacts-container"></ul>
+</script>
+
+<script type="text/template" id="template-test">
+    <a href="#about" class="btn btn-lg btn-outline">About Us</a>
+    <a href="#home" class="btn btn-lg btn-outline">Home</a>
+    <a href="#login" class="btn btn-lg btn-outline">Login</a>
+    <a href="#profile" class="btn btn-lg btn-outline">Profile</a>
+    <a href="#question" class="btn btn-lg btn-outline">Question</a>
+    <a href="#register" class="btn btn-lg btn-outline">Register</a>
+    <a href="#reset" class="btn btn-lg btn-outline">Reset</a>
+</script>
+
+<script type="text/template" id="template-component-question">
+    <div class="col-12">
+        <div class="row" style="margin: 16px 32px; background-color: rgba(6,56,129,0.9); border-radius: 13px; padding: 24px">
+            <div class="col-1 align-self-center">
+                <div class="">
+                    <button type="button" style="color: #602020; margin-bottom: 16px" class="btn bg-white"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;31</button>
+                    <button type="button" style="color: #602020" class="btn bg-white"><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp;12</button>
+                </div>
+
+            </div>
+            <div class="col-10">
+                <div  role="button" onclick="window.location.assign('question.html')" style="font-weight:bold; color: white; font-size: 19px"><%  question %></div>
+
+                <div class="w-100 d-inline-flex">
+                    <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">#Java</div>
+                    <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">#Java</div>
+                    <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">#Java</div>
+                </div>
+
+            </div>
+            <div class="col-1" style="display: flex;flex-direction: column;justify-content: space-between">
+                <div style="width: 100%; text-align: right">
+                    <span style="font-weight:bold; color: black; font-size: 13px; background-color: white; padding: 6px;">11</span>
+                </div>
+
+                <div style="font-weight:bold; color: white; font-size: 13px; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">23/02/2024</div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="template-about">
+
+    <div class="container-fluid">
+        <div class="row" style="padding-left: 50px">
+            <div class="col-1">
+                <img onclick="window.location.assign('#home')" src="res/img/left-arrow.png" style="width: 100px; height: 104px;padding-top: 30px;">
+            </div>
+            <div class="col-11">
+                <div class="text-center text-white float-end" style="font-size: 128px; font-family: Risque,serif">About Us</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="details-container">
+        <div class="w-100 text-center">
+            <img src="res/img/picture.png" style="width: 160px; height: 160px; border-radius: 16px">
+        </div>
+
+        <div style="font-size: 37px; color: white; margin-top: 16px">Achintha Jayatilake</div>
+        <div style="font-size: 37px; color: white">Software Engineer</div>
+        <div style="font-size: 23px; color: white">
+            No.99/9A,Gjgjhkjhkhihijoijp,Colombo 03<br/>
+            0702449969<br/>
+            achintha.2019530@iit.ac.lk
+        </div>
+    </div>
+
+
+</script>
+<script type="text/template" id="template-home">
+    <div class="container-fluid">
+        <div class="row" style="">
+            <div class="col-6" style="background-color: rgba(0,0,0,0.5)">
+                <div style="display: inline-flex; padding: 32px">
+                    <img src="res/img/logo.png" style="height: 76px; width: 85px; padding-right: 12px">
+                    <div style="color:white; font-size: 39px; font-weight:bold;padding-right: 16px">Developer Support</div>
+                    <img role="button" onclick="window.location.assign('#profile')" src="res/img/profile.png" style="height: 55px; width: 55px; margin-top: 8px">
+                </div>
+
+            </div>
+            <div class="col-6" id="navigation">
+                <div class="row">
+                    <div class="col-4">
+                        <a href="#home">
+                            Home
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="#about">
+                            About Us
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="#login">
+                            Sign Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 120px">
+            <div class="col-5">
+                <div  style="font-weight:bold; font-size: 33px; color: white; margin-top: 30px; margin-left: 32px">
+                    Top Questions
+                </div>
+            </div>
+            <div class="col-7">
+                <div class="row">
+                    <div class="col-3">
+                        <button style="margin-top:27px; background-color: rgba(105,228,255,0.8); border-radius: 24px; padding: 22px; font-weight:bold; color: black" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#question-modal">
+                            Ask Question
+                        </button>
+                    </div>
+                    <div class="col-9">
+                        <div class="input-group" style="margin-top: 22px; background-color: rgba(105,228,255,0.8); border-radius: 24px;">
+                            <input id="question-search" class="form-control" type="text" placeholder="Search..." style="color: black; font-size: 22px; font-weight:bold; padding: 22px; background-color: rgba(105,228,255,0.8); border-top-left-radius: 24px; border-bottom-left-radius: 24px;">
+                            <i style="padding: 22px; padding-top: 28px; background-color: rgba(105,228,255,0.8); border-top-right-radius: 24px; border-bottom-right-radius: 24px;" class="input-group-text fa-solid fa-magnifying-glass" ></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="question-container" class="row" style="max-height: calc(100vh - 280px); overflow-y: auto"></div>
+
+    </div>
+
+</script>
+
+<script type="text/template" id="template-login">
+
+    <img id="logo" src="res/img/qa.png">
+    <img id="dev-sup" src="res/img/dev_sup.png">
+
+    <div id="login-container">
+
+        <div class="w-100 text-center text-white" style="font-size: 44px;">Login</div>
+
+        <div class="mb-3">
+            <label class="form-label" for="username">Username</label>
+            <input class="form-control" type="text" name="username" id="username">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-control" type="password" name="password" id="password">
+        </div>
+
+
+        <button onclick="window.location.assign('#register')" style="background-color: #C2CED1 !important; color: black;" class="btn ">Sign Up</button>
+        <button id="login" style="background-color: #176AE5 !important; color: white;" class="btn float-end">Login</button>
+        <button style="background-color: #4C5E7A !important; color: white;" class="btn float-end me-3">Cancel</button>
+
+        <div role="button" onclick="window.location.assign('#reset')" style="font-size: 17px; font-weight:bold;" class="float-end mt-1 text-white">Forgot Password</div>
+
+    </div>
+
+<!--    <script>
+
+        async function login() {
+            let response = await fetch("/api/index.php/user/login/", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    username: "Achin",
+                    password: "12345678",
+                })
+            });
+
+            let promise = await response.text();
+            console.log(promise);
+        }-->
+
+</script>
+<script type="text/template" id="template-profile">
+
+    <div id="profile-container" class="container-fluid">
+        <div class="row" style="padding-top: 30px; padding-left: 50px">
+            <div class="col-1">
+                <img src="res/img/left-arrow.png" style="width: 100px; height: 74px;">
+            </div>
+            <div class="col-11">
+                <div class="text-center text-white" style="font-size: 44px">Profile</div>
+            </div>
+        </div>
+
+        <div class="p-5"></div>
+        <div class="row">
+            <div class="col px-5">
+                <div class="mb-3">
+                    <label class="form-label" for="p_first_name">First name</label>
+                    <input class="form-control" type="text" name="first_name" id="p_first_name">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="p_username">Username</label>
+                    <input class="form-control" type="text" name="username" id="p_username">
+                </div>
+            </div>
+
+            <div class="col px-5">
+                <div class="mb-3">
+                    <label class="form-label" for="p_last_name">Last name</label>
+                    <input class="form-control" type="text" name="last_name" id="p_last_name">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="p_email">Email</label>
+                    <input class="form-control" type="email" name="email" id="p_email">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="w-100 text-center pt-5">
+            <button id="profile-update" style="background-color: #176AE5 !important; color: white;" class="btn my-2">Update User Profile</button><br/>
+            <button onclick="window.location.assign('#reset')" style="background-color: #176AE5 !important; color: white;" class="btn my-2">Change Password</button>
+
+        </div>
+
+    </div>
+
+</script>
+<script type="text/template" id="template-question">
+
+
+    <div class="container-fluid">
+        <div class="row" style="">
+            <div class="col-6" style="background-color: rgba(0,0,0,0.5)">
+                <div style="display: inline-flex; padding: 32px">
+                    <img src="res/img/logo.png" style="height: 76px; width: 85px; padding-right: 12px">
+                    <div style="color:white; font-size: 39px; font-weight:bold;padding-right: 16px">Developer Support</div>
+                    <img role="button" onclick="window.location.assign('#profile')" src="res/img/profile.png" style="height: 55px; width: 55px; margin-top: 8px">
+                </div>
+
+            </div>
+            <div class="col-6" id="answer-nav">
+                <div class="row">
+                    <div class="col-4">
+                        <a href="#home">
+                            Home
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="#about">
+                            About Us
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="#login">
+                            Sign Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 12px; height: calc(100vh - 200px); overflow-y: auto; overflow-x: hidden">
+            <div class="row">
+                <div class="col-12">
+                    <div id="answer-question-date" style="font-weight:bold; color: white; font-size: 19px; margin-left: 30px">Date: 02/02/2024</div>
+                    <div class="row" style="margin: 16px 32px;">
+                        <div class="col-12" style="margin-bottom: 16px; background-color: rgba(6,56,129,0.9); border-radius: 13px; padding: 24px;">
+                            <div id="answer-question-text" style="font-weight:bold; color: white; font-size: 36px">
+                                Storing Array Lists in Java Obects and best constructor approach
+                                Storing Array Lists in Java Obects and best constructor approach
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <button id="answer-question-likes" type="button" style="color: #602020; background-color: #90B4F9;" class="btn"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;</button>
+                            <button id="answer-question-dislikes" type="button" style="color: #602020; background-color: #90B4F9;" class="btn"><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp</button>
+                        </div>
+                        <div class="col-6">
+                            <div id="answer-question-tags" class="w-100 d-inline-flex justify-content-end">
+                                <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-right: 16px; width: fit-content">#Java</div>
+                                <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-right: 16px; width: fit-content">#Java</div>
+                                <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-right: 16px; width: fit-content">#Java</div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button style="margin-top:27px; background-color: #82C789; border-radius: 24px; font-size: 22px; font-weight:bold; color: black; padding-left: 16px; padding-right: 16px" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#answer-modal">
+                                Answer
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="answer-container" class="row" style="padding-left: 24px">
+                <div class="col-12">
+                    <div class="row" style="margin: 16px 32px; background-color: rgba(6,56,129,0.9); border-radius: 13px; padding: 24px">
+                        <div class="col-1 align-self-center">
+                            <div class="">
+                                <button type="button" style="color: #602020; margin-bottom: 16px" class="btn bg-white"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;31</button>
+                                <button type="button" style="color: #602020" class="btn bg-white"><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp;12</button>
+                            </div>
+
+                        </div>
+                        <div class="col-10">
+                            <div style="font-weight:bold; color: white; font-size: 19px">
+                                Storing Array Lists in Java Obects and best constructor approach
+                                Storing Array Lists in Java Obects and best constructor approach
+                                Storing Array Lists in Java Obects and best constructor approach
+                            </div>
+
+                            <div class="w-100 d-inline-flex">
+                                <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">#Java</div>
+                                <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">#Java</div>
+                                <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">#Java</div>
+                            </div>
+
+                        </div>
+                        <div class="col-1" style="display: flex;flex-direction: column;justify-content: space-between">
+                            <div style="width: 100%; text-align: right">
+                                <span style="font-weight:bold; color: black; font-size: 13px; background-color: white; padding: 6px;">11</span>
+                            </div>
+
+                            <div style="font-weight:bold; color: white; font-size: 13px; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">23/02/2024</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row" style="margin: 16px 32px; background-color: rgba(6,56,129,0.9); border-radius: 13px; padding: 24px">
+                        <div class="col-1 align-self-center">
+                            <div class="">
+                                <button type="button" style="color: #602020; margin-bottom: 16px" class="btn bg-white"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;31</button>
+                                <button type="button" style="color: #602020" class="btn bg-white"><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp;12</button>
+                            </div>
+
+                        </div>
+                        <div class="col-10">
+                            <div style="font-weight:bold; color: white; font-size: 19px">
+                                Storing Array Lists in Java Obects and best constructor approach
+                                Storing Array Lists in Java Obects and best constructor approach
+                                Storing Array Lists in Java Obects and best constructor approach
+                            </div>
+
+                            <div class="w-100 d-inline-flex">
+                                <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">#Java</div>
+                                <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">#Java</div>
+                                <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">#Java</div>
+                            </div>
+
+                        </div>
+                        <div class="col-1" style="display: flex;flex-direction: column;justify-content: space-between">
+                            <div style="width: 100%; text-align: right">
+                                <span style="font-weight:bold; color: black; font-size: 13px; background-color: white; padding: 6px;">11</span>
+                            </div>
+
+                            <div style="font-weight:bold; color: white; font-size: 13px; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">23/02/2024</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row" style="margin: 16px 32px; background-color: rgba(6,56,129,0.9); border-radius: 13px; padding: 24px">
+                        <div class="col-1 align-self-center">
+                            <div class="">
+                                <button type="button" style="color: #602020; margin-bottom: 16px" class="btn bg-white"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;31</button>
+                                <button type="button" style="color: #602020" class="btn bg-white"><i class="fa fa-thumbs-down"></i>&nbsp;&nbsp;12</button>
+                            </div>
+
+                        </div>
+                        <div class="col-10">
+                            <div style="font-weight:bold; color: white; font-size: 19px">
+                                Storing Array Lists in Java Obects and best constructor approach
+                                Storing Array Lists in Java Obects and best constructor approach
+                                Storing Array Lists in Java Obects and best constructor approach
+                            </div>
+
+                            <div class="w-100 d-inline-flex">
+                                <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">#Java</div>
+                                <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">#Java</div>
+                                <div style="font-weight:bold; color: #158D3E; font-size: 17px; background-color: white; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">#Java</div>
+                            </div>
+
+                        </div>
+                        <div class="col-1" style="display: flex;flex-direction: column;justify-content: space-between">
+                            <div style="width: 100%; text-align: right">
+                                <span style="font-weight:bold; color: black; font-size: 13px; background-color: white; padding: 6px;">11</span>
+                            </div>
+
+                            <div style="font-weight:bold; color: white; font-size: 13px; padding: 6px; margin-top: 16px; margin-right: 16px; width: fit-content">23/02/2024</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</script>
+<script type="text/template" id="template-register">
+    <div id="register-container" class="container-fluid">
+        <div class="row" style="padding-top: 30px; padding-left: 50px">
+            <div class="col-1">
+                <img role="button" onclick="window.location.assign('#login')" src="res/img/left-arrow.png" style="width: 100px; height: 74px;">
+            </div>
+            <div class="col-11">
+                <div class="text-center text-white" style="font-size: 44px">Sign Up</div>
+            </div>
+        </div>
+
+        <div class="p-5"></div>
+        <div class="row">
+            <div class="col px-5">
+                <div class="mb-3">
+                    <label class="form-label" for="r_first_name">First name</label>
+                    <input class="form-control" type="text" name="first_name" id="r_first_name">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="r_username">Username</label>
+                    <input class="form-control" type="text" name="username" id="r_username">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="r_password">Password</label>
+                    <input class="form-control" type="password" name="password" id="r_password">
+                </div>
+            </div>
+
+            <div class="col px-5">
+                <div class="mb-3">
+                    <label class="form-label" for="r_last_name">Last name</label>
+                    <input class="form-control" type="text" name="last_name" id="r_last_name">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="r_email">Email</label>
+                    <input class="form-control" type="email" name="email" id="r_email">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="r_confirm_password">Confirm Password</label>
+                    <input class="form-control" type="password" name="confirm_password" id="r_confirm_password">
+                </div>
+            </div>
+        </div>
+
+        <div class="w-100 text-center pt-5">
+            <button id="r_signup" style="background-color: #176AE5 !important; color: white;" class="btn">Sign up</button>
+        </div>
+
+    </div>
+
+</script>
+<script type="text/template" id="template-reset">
+    <div id="reset-container" class="container-fluid">
+        <div class="row" style="padding-top: 30px; padding-left: 50px">
+            <div class="col-1">
+                <img role="button" onclick="window.location.assign('#login')" src="res/img/left-arrow.png" style="width: 100px; height: 74px;">
+            </div>
+            <div class="col-11">
+                <div class="text-center text-white" style="font-size: 44px">Reset Your Password</div>
+            </div>
+        </div>
+
+        <div class="p-5"></div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6 px-5">
+                <div class="mb-3">
+                    <label class="form-label" for="res_email">Email</label>
+                    <div class="input-group">
+                        <input class="form-control" type="email" name="email" id="res_email">
+                        <span class="input-group-text" style="width: 80px; background-color: white">
+						<button class="text-white btn" style="background-color: #4576BE; border-radius: 52px">Go</button>
+					</span>
+                    </div>
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="r_verification">Verification Code</label>
+                    <div class="input-group">
+                        <input class="form-control" type="text" name="verification" id="r_verification">
+                        <span class="input-group-text" style="width: 110px; background-color: white; font-size: 31px">
+						1:59s
+					</span>
+                    </div>
+
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="r_res-password">Password</label>
+                    <input class="form-control" type="password" name="password" id="r_res-password">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="res_confirm_password">Confirm Password</label>
+                    <input class="form-control" type="password" name="confirm_password" id="res_confirm_password">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="w-100 text-center pt-5">
+            <button id="r_change" style="background-color: #176AE5 !important; color: white;" class="btn my-2">Change Password</button>
+
+        </div>
+
+    </div>
+</script>
+
+<script type="text/template" id="tpl-contact">
+    <div class="thumbnail">
+        <img class="media-object" src="backbone/app/img/faces/<%- avatar %>">
+    </div>
+    <div class="media-heading">
+        <h3>
+            <%- name %>
+            <small>
+                <a href="#contacts/edit/<%- id %>"><span class="glyphicon glyphicon-pencil"></span></a>
+                <a href="#contacts/delete/<%- id %>" class="delete-contract">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </small>
+        </h3>
+    </div>
+    <div class="media-body">
+        <dl>
+            <dt>Phone Number:</dt>
+            <dd><%- tel %></dd>
+            <dt>Email:</dt>
+            <dd><%- email %></dd>
+        </dl>
+    </div>
+    <hr>
+</script>
+<script type="text/template" id="tpl-new-contact">
+    <h2 class="page-header text-center"><%= isNew ? 'Create' : 'Edit' %> Contact</h2>
+    <form role="form" class="form-horizontal contract-form">
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Full name:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control contact-name-input" value="<%- name %>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Email address:</label>
+            <div class="col-sm-6">
+                <input type="email" class="form-control contact-email-input" value="<%- email %>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Telephone number:</label>
+            <div class="col-sm-6">
+                <input type="tel" class="form-control contact-tel-input" value="<%- tel %>">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-3">
+                <button type="submit" class="btn btn-outline btn-lg btn-block">Submit</button>
+            </div>
+            <div class="col-sm-3">
+                <a href="#contacts" class="btn btn-outline btn-lg btn-block">Cancel</a>
+            </div>
+        </div>
+    </form>
+</script>
+
+<script src="backbone/vendor/jquery/jquery.js"></script>
+<script src="backbone/vendor/underscore/underscore.js"></script>
+<script src="backbone/vendor/backbone/backbone.js"></script>
+
+<script src="backbone/app/js/app.js"></script>
+<script src="backbone/app/js/models.js"></script>
+<script src="backbone/app/js/collections/contacts.js"></script>
+<script src="backbone/app/js/views.js"></script>
+<script src="backbone/app/js/router.js"></script>
+
+<script>
+    $(function() {
+        DeveloperSupport.start({
+
+        });
+    });
+</script>
+
+<div class="modal fade" id="question-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="question-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" >
+        <div class="modal-content" style="background-color: rgba(6,56,129,0.9); border-radius: 30px">
+
+            <div class="modal-header" style="border: none" >
+                <h5 style="font-size: 43px; font-weight:bold; text-align: center; width: 100%; color: white" class="modal-title" id="question-modal-label">Question</h5>
+                <img src="res/img/close.png" role="button" style="width: 42px; height: 42px" data-bs-dismiss="modal" aria-label="Close"/>
+            </div>
+
+            <div class="modal-body">
+
+
+                <textarea id="ask-question-text" style="padding: 24px; font-size: 25px" class="form-control" placeholder="Type Your Question Here..." rows="5"></textarea>
+                <div class="w-100 text-center" style="font-weight:bold;font-size: 25px; color: white; padding-top: 30px">Add Tags</div>
+                <div id="ask-question-tags" class="w-100" style="display: inline-flex">
+                    <div class="input-group mx-1">
+                        <span class="input-group-text">#</span>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <div class="input-group mx-1">
+                        <span class="input-group-text">#</span>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <div class="input-group mx-1">
+                        <span class="input-group-text">#</span>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <div class="input-group mx-1">
+                        <span class="input-group-text">#</span>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <div class="input-group mx-1">
+                        <span class="input-group-text">#</span>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+
+                <div class="w-100 text-center" style="margin-top: 26px">
+                    <button id="post-question" style=" background-color: rgba(43,78,204,0.8); border-radius: 8px; font-weight:bold; font-size: 25px; color: white" type="button" class="btn">Post Question</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="answer-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="answer-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" >
+        <div class="modal-content" style="background-color: rgba(6,56,129,0.9); border-radius: 30px">
+
+            <div class="modal-header" style="border: none" >
+                <h5 style="font-size: 43px; font-weight:bold; text-align: center; width: 100%; color: white" class="modal-title" id="answer-modal-label">Answer</h5>
+                <img src="res/img/close.png" role="button" style="width: 42px; height: 42px" data-bs-dismiss="modal" aria-label="Close"/>
+            </div>
+
+            <div class="modal-body">
+
+
+                <textarea id="post-answer-text" style="padding: 24px; font-size: 25px" class="form-control" placeholder="Type Your Answer Here..." rows="5"></textarea>
+
+                <div class="w-100 text-center" style="margin-top: 26px">
+                    <button id="post-answer" style=" background-color: rgba(43,78,204,0.8); border-radius: 8px; font-weight:bold; font-size: 25px; color: white" type="button" class="btn">Post Answer</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
