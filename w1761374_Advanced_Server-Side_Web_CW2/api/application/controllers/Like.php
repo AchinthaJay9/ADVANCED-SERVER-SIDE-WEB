@@ -1,20 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * @property $db
- * @property $session
- * @property $input
- */
 class Like extends CI_Controller {
 
-
-	public function __construct()
-	{
+	public function __construct() {
 		parent::__construct();
-		$this->load->database();
+		$this->load->model('like_model');
 		$this->load->library('session');
 	}
+
 
 	public function index(){
 

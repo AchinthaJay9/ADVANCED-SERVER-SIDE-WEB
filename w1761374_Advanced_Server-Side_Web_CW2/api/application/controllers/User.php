@@ -1,18 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * @property $db
- * @property $session
- * @property $input
- */
 class User extends CI_Controller {
 
-
-	public function __construct()
-	{
+	public function __construct() {
 		parent::__construct();
-		$this->load->database();
+		$this->load->model('user_model');
 		$this->load->library('session');
 	}
 
@@ -183,24 +176,24 @@ class User extends CI_Controller {
 		}
 		if ($this->input->server('REQUEST_METHOD') === 'DELETE'){
 
-				if (!isset($this->session->userdata['login']) ||
-					$this->session->userdata['login'] == null){
-
-					echo json_encode(array(
-						'success' => false,
-						'message' => "Not logged in",
-					));
-					return;
-				}
-
-				$id = $this->session->userdata('login');
-				$this->session->userdata['login'] = null;
+			if (!isset($this->session->userdata['login']) ||
+				$this->session->userdata['login'] == null){
 
 				echo json_encode(array(
-					'success' => true,
-					'message' => "Logged out successfully",
+					'success' => false,
+					'message' => "Not logged in",
 				));
 				return;
+			}
+
+			$id = $this->session->userdata('login');
+			$this->session->userdata['login'] = null;
+
+			echo json_encode(array(
+				'success' => true,
+				'message' => "Logged out successfully",
+			));
+			return;
 		}
 
 

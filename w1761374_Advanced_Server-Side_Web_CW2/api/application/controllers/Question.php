@@ -1,26 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/**
- * @property $db
- * @property $session
- * @property $input
- */
-class Question extends CI_Controller {
-
+class Question extends CI_Controller
+{
 
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->database();
 		$this->load->library('session');
+		$this->load->model('question_model');
 	}
 
-	public function index($qid = null){
-
-		if (!isset($this->session->userdata['login']) ||
-			$this->session->userdata['login'] == null){
-
+	public function index($qid = null)
+	{
+		if (!isset($this->session->userdata['login']) || $this->session->userdata['login'] == null) {
 			echo json_encode(array(
 				'success' => false,
 				'message' => "Not logged in",
@@ -30,8 +24,7 @@ class Question extends CI_Controller {
 
 		$id = $this->session->userdata('login');
 
-
-		if ($this->input->server('REQUEST_METHOD') === 'POST'){
+		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 
 			$input = json_decode($this->input->raw_input_stream, true);
 
@@ -49,7 +42,7 @@ class Question extends CI_Controller {
 
 			$insert_id = $this->db->insert_id();
 
-			if ($this->db->error()['code'] != 0){
+			if ($this->db->error()['code'] != 0) {
 				echo json_encode(array(
 					'success' => false,
 					'message' => $this->db->error()['message'],
@@ -65,8 +58,8 @@ class Question extends CI_Controller {
 
 			return;
 		}
-		if ($this->input->server('REQUEST_METHOD') === 'GET'){
-			if (isset($qid) && $qid != null){
+		if ($this->input->server('REQUEST_METHOD') === 'GET') {
+			if (isset($qid) && $qid != null) {
 
 				$question = $this->db->get_where('question', array('id' => $qid))->row_array();
 				$question["likes"] = $this->db->get_where('like', array('question' => $qid, 'like' => 1))->num_rows();
@@ -80,12 +73,12 @@ class Question extends CI_Controller {
 
 				));
 				return;
-			}else {
+			} else {
 
 				$questions = $this->db->get('question')->result_array();
 
 
-				$questions = array_map(function($question){
+				$questions = array_map(function ($question) {
 					$question['likes'] = $this->db->get_where('like', array('question' => $question['id'], 'like' => 1))->num_rows();
 					$question['dislikes'] = $this->db->get_where('like', array('question' => $question['id'], 'like' => 0))->num_rows();
 					$question['user'] = $this->db->get_where('user', array('id' => $question['uid']))->row_array();
@@ -102,7 +95,6 @@ class Question extends CI_Controller {
 		}
 
 
-
 		echo json_encode(array(
 			'success' => false,
 			'message' => "Invalid request",
@@ -111,8 +103,10 @@ class Question extends CI_Controller {
 
 
 	}
-	public function login(){
-		if ($this->input->server('REQUEST_METHOD') === 'POST'){
+
+	public function login()
+	{
+		if ($this->input->server('REQUEST_METHOD') === 'POST') {
 
 			$input = json_decode($this->input->raw_input_stream, true);
 
@@ -121,7 +115,7 @@ class Question extends CI_Controller {
 
 			$user = $this->db->get_where('user', array('username' => $username));
 
-			if ($this->db->error()['code'] != 0){
+			if ($this->db->error()['code'] != 0) {
 				echo json_encode(array(
 					'success' => false,
 					'message' => json_encode($this->db->error()),
@@ -132,15 +126,14 @@ class Question extends CI_Controller {
 			$user = $user->row_array();
 
 
-
-			if ($user == null){
+			if ($user == null) {
 				echo json_encode(array(
 					'success' => false,
 					'message' => "Invalid username!",
 				));
 				return;
 			}
-			if (strcmp($password, $user['password']) != 0){
+			if (strcmp($password, $user['password']) != 0) {
 				echo json_encode(array(
 					'success' => false,
 					'message' => "Wrong password",
@@ -158,5 +151,6 @@ class Question extends CI_Controller {
 
 			return;
 		}
+
 	}
 }
